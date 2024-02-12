@@ -1,11 +1,3 @@
 <h1>Result</h1>
-<% if @result && @is_english %>
-  <p>Congrats, that's a valid word!</p>
-<% elsif @result == false%>
-  <p>Sorry, but <%= params[:word] %> can't be built out of <%= @letters.join(',') %></p>
-<% elsif @is_english == false %>
-  <p>Sorry, but <%= params[:word] %> doesn't seem to be a valid English word...</p>
-<% else %>
-  <p>Reached else statement</p>
-<% end %>
+<p><%= @final_display %></p>
 <%= link_to "Try again", new_path %>

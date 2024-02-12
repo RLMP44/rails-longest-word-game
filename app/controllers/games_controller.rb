@@ -17,9 +17,11 @@ class GamesController < ApplicationController
   def score
     # use user word as endpoint and parse
     @word = (params[:word] || ' ').upcase
+    @input = params[:word]
     @letters = params[:letters].split
     @is_english = english_word?(@word)
     @result = included?(@word, @letters)
+    @final_display = create_display(@result, @is_english, @input, @letters)
   end
 
   private
@@ -34,5 +36,17 @@ class GamesController < ApplicationController
     word_serialized = URI.open(user_word_endpoint).read
     @json_word = JSON.parse(word_serialized)
     @json_word['found']
+  end
+
+  def create_display(result, is_english, input, letters)
+    if result && is_english
+      "Congrats, that's a valid word!"
+    elsif result == false
+      "Sorry, but #{input} can't be built out of #{letters.join(',')}"
+    elsif is_english == false
+      "Sorry, but #{input} doesn't seem to be a valid English word..."
+    else
+      'Reached else statement'
+    end
   end
 end
