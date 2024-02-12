@@ -5,6 +5,9 @@ class GamesController < ApplicationController
   VOWELS = ["A", "E", "I", "O", "U"]
   ALPHABET = ('A'..'Z').to_a
 
+  def home
+  end
+
   def new
     @letters = Array.new(5) { VOWELS.sample }
     @letters += Array.new(5) { (('A'..'Z').to_a - VOWELS).sample }
